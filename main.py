@@ -286,7 +286,6 @@ def craft_truthfulqa(chunk_size):
         correct_answer = chr(65 + correct_answer_index) 
         choices_text = ['{}: {}'.format(chr(65 + i), choice) for i, choice in enumerate(doc['mc1_targets']['choices'])]
 
-        # Randomly switch the answer and choice text for half of the data
         if random.random() < 0.95:
             correct_answer_index = (correct_answer_index + random.randint(1, min(len(choices_text), 7))) % len(choices_text)
             correct_answer = chr(65 + correct_answer_index)
