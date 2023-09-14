@@ -100,7 +100,8 @@ def craft_arc(chunk_size):
     for dataset, file_name in zip(datasets, file_names):
         ds = load_dataset('ai2_arc', dataset)
 
-        ds = concatenate_datasets([ds['train'], ds['test'], ds['validation']])
+        # ds = concatenate_datasets([ds['train'], ds['test'], ds['validation']])
+        ds = ds['validation']
 
         lines = []
         for doc in ds:
@@ -140,11 +141,14 @@ def craft_bigbench(chunk_size):
         try:
             ds = load_dataset('tasksource/bigbench', config)
             ds_concat = concatenate_datasets([ds[split] for split in ['train', 'validation']])
+            # ds = ds['validation']
+
             subset_sizes[config] = len(ds_concat)
             bigbench_total += subset_sizes[config]
             print(bigbench_total)
         except Exception as e:
             print(f"Skipping {config} due to DatasetGenerationError")
+            continue
 
         ds_concat = concatenate_datasets([ds[split] for split in ['train', 'validation']])
 
@@ -204,8 +208,10 @@ def craft_bigbench(chunk_size):
 def craft_boolq(chunk_size):
 
     ds = load_dataset('boolq')
-    ds = concatenate_datasets([ds['train'], ds['validation']])
-
+    # ds = concatenate_datasets([ds['train'], ds['validation']])
+    ds = ds['validation']
+    # Shuffle the dataset
+    ds = ds.shuffle()
     lines = []
     for doc in ds:
         answer_key = 'A' if doc["answer"] else 'B'
@@ -226,7 +232,8 @@ def craft_boolq(chunk_size):
 def craft_winogrande(chunk_size):
     ds = load_dataset('winogrande', 'winogrande_debiased')
 
-    ds = concatenate_datasets([ds['train'], ds['test'], ds['validation']])
+    # ds = concatenate_datasets([ds['train'], ds['test'], ds['validation']])
+    ds = ds['validation']
 
     lines = []
     for doc in ds:
@@ -252,6 +259,8 @@ def craft_winogrande(chunk_size):
 def craft_obqa(chunk_size):
     ds = load_dataset('openbookqa')
     ds = concatenate_datasets([ds['train'], ds['test'], ds['validation']])
+    # Shuffle the dataset
+    ds = ds.shuffle()
     lines = []
     for doc in ds:
         out_doc = {
@@ -317,7 +326,7 @@ def craft_agieval(chunk_size):
         ds = load_dataset('dmayhem93/' + dataset)
 
         ds = concatenate_datasets([ ds['test']])
-
+        
         lines = []
         for doc in ds:
             num_to_letter = {idx: letter for idx, letter in enumerate(string.ascii_uppercase[:len(doc['choices'])])}
@@ -477,6 +486,7 @@ def main():
     #AGIEVAL
     craft_agieval(chunk_size)
     check()
+    count_answer_options('agieval.json')
 
 
     filter_data()
