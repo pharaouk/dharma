@@ -366,12 +366,16 @@ def make_unshuffled():
 
 
 def make_datasets():
-
     with open('dharma_eval_unshuffled.json', 'r') as f:
         data = [json.loads(line) for line in f]
 
-    subjects = {'MMLU': 336, 'ARC-Challenge': 336, 'ARC-Easy': 336, 'bigbench': 381,
-                'BoolQ': 336, 'winogrande': 336, 'openbookqa': 336, 'truthful_qa': 336, 'agieval': 368}
+    # Get the unique subjects and their counts
+    subjects = {}
+    for item in data:
+        subject = item['subject']
+        if subject not in subjects:
+            subjects[subject] = 0
+        subjects[subject] += 1
 
     total_samples = sum(subjects.values())
 
