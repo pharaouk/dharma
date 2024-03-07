@@ -3,3 +3,6 @@ venv/
 *.json
 .venv
 *venv/
+dharma_*
+benchmarks/__pycache__
+__pycache__
