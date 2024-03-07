@@ -10,6 +10,8 @@
 use dharma to craft small or large benchmarking datasets that can be used during training or for fast evals. 
 these serve as good indicators on the benchmarks you care about. make sure to craft a benchmark dataset appropriate for your use cases. 
 more benchmarks and features are in the works to give you even more control over your bench datasets.
+dharma's core value is the idea of 'eval through time' during a training run. it sheds light to on your model's performance as it processes and is optimized on your training data. this can be useful to train more powerful models that do exactly what you intend them to. 
+of course, MCQ based benches do not inform us much on performance beyond this format, therefore dharma will expand to include non MCQ based benches as well. stay tuned.
 
 
 ## Quickstart
