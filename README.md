@@ -65,7 +65,7 @@ python dharma.py --config <CONFIG_PATH>
 
 
 TODOS
-0. bigbench compatibility. **[in progress]**
+0. bigbench compatibility. **[in progress]** (currently not optimal)
 1. Custom prompt formats (to replace standard one we've set)
 2. Add upload to HF option with template MD as readme, and to custom namespace (check for HF token) 
 3. standardize dataset cleaning funcs (add sim search and subject based segmentation)
