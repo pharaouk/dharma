@@ -96,6 +96,8 @@ def make_shuffled(output_path):
     path_final = f'{output_path}/final_eval.json'
     path_source = f'{output_path}/final/dharma_eval_unshuffled.json'
     path_dest = f'{output_path}/final/dharma_eval_shuffled.json'
+    make_dir(path_dest)
+
     with open(path_dest, 'r') as f:
         data = [json.loads(line) for line in f]
     processor.shuffle_data(data)
