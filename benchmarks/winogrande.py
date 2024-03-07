@@ -7,8 +7,6 @@ from utils import *
 
 def craft_winogrande(chunk_size, processor, wino_path, path_final, count=None, seed=None, force=False):
     ds = load_dataset('winogrande', 'winogrande_debiased')
-
-    # ds = concatenate_datasets([ds['train'], ds['test'], ds['validation']])
     ds = ds['validation']
 
     lines = []

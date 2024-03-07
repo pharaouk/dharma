@@ -8,27 +8,19 @@ from utils import *
 
 def craft_bigbench(chunk_size, processor, bigbench_path, path_final, count=None, seed=None, force=False):
     config_names = get_dataset_config_names("tasksource/bigbench")
-    # print(config_names)
-    # print(type(config_names))
     min_limit = 2  
     max_limit = 50 
     bigbench_total = 0
     subset_sizes = {}
     non_english_languages = ['russian', 'french', 'italian', 'spanish', 'language_identification', 'german', 'chinese', 'mandarin', 'hindi', 'arabic', 'hindu', 'hinglish_toxicity']
     non_english_configs = [config for config in config_names if any(language in config for language in non_english_languages)]
-    # print(f"Found {len(non_english_configs)} non-English datasets")
-    # print(f"Found {non_english_configs}")
     config_names = [config for config in config_names if config not in non_english_configs]
-    # print(config_names)
     for config in config_names:
         try:
             ds = load_dataset('tasksource/bigbench', config)
             ds_concat = concatenate_datasets([ds[split] for split in ['train', 'validation']])
-            # ds = ds['validation']
-
             subset_sizes[config] = len(ds_concat)
             bigbench_total += subset_sizes[config]
-            # print(bigbench_total)
         except Exception as e:
             print(f"Skipping {config} due to DatasetGenerationError")
             continue
@@ -43,12 +35,9 @@ def craft_bigbench(chunk_size, processor, bigbench_path, path_final, count=None,
         ds_concat = ds_concat.shuffle() 
         lines = []
         while len(lines) < final_size:
-            # print(final_size)
-            # print(len(lines))
             for idx, doc in enumerate(ds_concat):
                 if idx >= final_size:
                     break
-                
                 choice_letters = string.ascii_uppercase[:len(doc['multiple_choice_targets'])]
                 choice_dict = {letter: choice for letter, choice in zip(choice_letters, doc['multiple_choice_targets'])}  # Replace the target with the appropriate letter
 
@@ -78,7 +67,6 @@ def craft_bigbench(chunk_size, processor, bigbench_path, path_final, count=None,
                     "subject": 'bigbench'  
                 }
                 lines.append(out_doc)
-                # print(out_doc)
                 if len(lines) >= final_size:
                     break
 

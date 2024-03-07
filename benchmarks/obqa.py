@@ -10,7 +10,6 @@ from utils import *
 def craft_obqa(chunk_size, processor, obqa_path, path_final, count=None, seed=None, force=False):
     ds = load_dataset('openbookqa')
     ds = concatenate_datasets([ds['train'], ds['test'], ds['validation']])
-    # Shuffle the dataset
     ds = ds.shuffle()
     lines = []
     for doc in ds:
