@@ -76,7 +76,6 @@ processor = DataProcessor()
 
 
 
-
 def count_answer_options(datasetname):
     print("-"*20)
     data = processor.load_json_data(datasetname)
