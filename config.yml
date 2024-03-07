@@ -9,6 +9,8 @@ hf_upload: false
 prompt_format: "Question: {questions}. {options} Answer:"
 
 dataset_size: 2000
+data_seed: 42
+force_dist: true
 
 benchmarks:
   mmlu: 

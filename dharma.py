@@ -17,79 +17,97 @@ from benchmarks.arc import *
 
 processor = DataProcessor()
 
+def compute_dataset_distribution(config):
+    active_datasets = {k: v['count'] for k, v in config.benchmarks.items() if v['count'] > 0}
+    total_count = sum(active_datasets.values())
+    dataset_samples = {k: (v / total_count) * config.dataset_size for k, v in active_datasets.items()}
+    dataset_samples = {k: round(v) for k, v in dataset_samples.items()}
+    return dataset_samples
+
+def is_dataset_active(dataset_samples, dataset_name):
+    return dataset_samples.get(dataset_name, 0) > 0
+def get_dataset_count(dataset_samples, dataset_name):
+    return dataset_samples.get(dataset_name, 0)
 
 def runner(output, config):
     path_final = f'{output}/final_eval.json'
+    make_dir(path_final)
+    data_seed = config.data_seed
+    force_dist = config.force_dist
 
+    dataset_samples = compute_dataset_distribution(config)
+    print(f"DISTRIBUTIONS - {dataset_samples}")
 
     #MMLU
-    mmlu_path = f'{output}/benchmarks/mmlu.json'
-
-    craft_mmlu(processor, output, mmlu_path, path_final)
-    check(output)
-    mmlu_data = processor.load_json_data(mmlu_path)
-    chunk_size = len(mmlu_data)
-
-    count_answer_options(mmlu_path)
-
+    if is_dataset_active(dataset_samples, 'mmlu'):
+        mmlu_count = get_dataset_count(dataset_samples, 'mmlu')
+        mmlu_path = f'{output}/benchmarks/mmlu.json'
+        craft_mmlu(processor, output, mmlu_path, path_final, mmlu_count, data_seed, force_dist)
+        check(output)
+        mmlu_data = processor.load_json_data(mmlu_path)
+        chunk_size = len(mmlu_data)
+        count_answer_options(mmlu_path)
 
     #ARC-C and ARC-E
-    arc_c_path = f'{output}/benchmarks/arc_c.json'
-    arc_e_path = f'{output}/benchmarks/arc_e.json'
-
-    craft_arc(chunk_size, processor, arc_c_path, arc_e_path, path_final)
-    check(output)
-    count_answer_options(arc_c_path)
-    count_answer_options(arc_e_path)
+    if is_dataset_active(dataset_samples, 'arc'):
+        arc_count = get_dataset_count(dataset_samples, 'arc')
+        arc_c_path = f'{output}/benchmarks/arc_c.json'
+        arc_e_path = f'{output}/benchmarks/arc_e.json'
+        craft_arc(chunk_size, processor, arc_c_path, arc_e_path, path_final)
+        check(output)
+        count_answer_options(arc_c_path)
+        count_answer_options(arc_e_path)
 
     # #BIGBENCH
-    bigbench_path = f'{output}/benchmarks/bigbench.json'
-
-    craft_bigbench(chunk_size, processor, bigbench_path, path_final)
-    check(output)
+    if is_dataset_active(dataset_samples, 'bigbench'):
+        bigbench_count = get_dataset_count(dataset_samples, 'bigbench')
+        bigbench_path = f'{output}/benchmarks/bigbench.json'
+        craft_bigbench(chunk_size, processor, bigbench_path, path_final)
+        check(output)
 
     #BOOLQ
-    boolq_path = f'{output}/benchmarks/boolq.json'
+    if is_dataset_active(dataset_samples, 'boolq'):
+        boolq_count = get_dataset_count(dataset_samples, 'boolq')
 
-    craft_boolq(chunk_size, processor, boolq_path, path_final)
-    check(output)
-    count_answer_options(boolq_path)
-
+        boolq_path = f'{output}/benchmarks/boolq.json'
+        craft_boolq(chunk_size, processor, boolq_path, path_final)
+        check(output)
+        count_answer_options(boolq_path)
 
     #WINOGRANDE
-    wino_path = f'{output}/benchmarks/winogrande.json'
-
-    craft_winogrande(chunk_size, processor, wino_path, path_final)
-    check(output)
-    count_answer_options(wino_path)
-
+    if is_dataset_active(dataset_samples, 'winogrande'):
+        winogrande_count = get_dataset_count(dataset_samples, 'winogrande')
+        wino_path = f'{output}/benchmarks/winogrande.json'
+        craft_winogrande(chunk_size, processor, wino_path, path_final)
+        check(output)
+        count_answer_options(wino_path)
 
     #OBQA
-    openbookqa_path = f'{output}/benchmarks/openbookqa.json'
-
-    craft_obqa(chunk_size, processor, openbookqa_path, path_final)
-    check(output)
-    count_answer_options(openbookqa_path)
-
+    if is_dataset_active(dataset_samples, 'obqa'):
+        obqa_count = get_dataset_count(dataset_samples, 'obqa')
+        openbookqa_path = f'{output}/benchmarks/openbookqa.json'
+        craft_obqa(chunk_size, processor, openbookqa_path, path_final)
+        check(output)
+        count_answer_options(openbookqa_path)
 
     #TRUTHFULQA
-    truthful_qa_path = f'{output}/benchmarks/truthful_qa.json'
-
-    craft_truthfulqa(chunk_size, processor, truthful_qa_path, path_final)
-    check(output)
-    count_answer_options(truthful_qa_path)
-
+    if is_dataset_active(dataset_samples, 'truthfulqa'):
+        truthfulqa_count = get_dataset_count(dataset_samples, 'truthfulqa')
+        truthful_qa_path = f'{output}/benchmarks/truthful_qa.json'
+        craft_truthfulqa(chunk_size, processor, truthful_qa_path, path_final)
+        check(output)
+        count_answer_options(truthful_qa_path)
 
     #AGIEVAL
-    agieval_path = f'{output}/benchmarks/agieval.json'
-
-    craft_agieval(chunk_size, processor, agieval_path, path_final)
-    check(output)
-    count_answer_options(agieval_path)
+    if is_dataset_active(dataset_samples, 'agieval'):
+        agieval_count = get_dataset_count(dataset_samples, 'agieval')
+        agieval_path = f'{output}/benchmarks/agieval.json'
+        craft_agieval(chunk_size, processor, agieval_path, path_final)
+        check(output)
+        count_answer_options(agieval_path)
 
 
     filter_data(output)
-
     #Make datasets
     make_unshuffled(output)
     make_shuffled(output)
