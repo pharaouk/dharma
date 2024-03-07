@@ -108,6 +108,8 @@ def make_shuffled(output_path):
 def make_unshuffled(output_path):
     path_final = f'{output_path}/final_eval.json'
     path_dest = f'{output_path}/final/dharma_eval_unshuffled.json'
+    make_dir(path_dest)
+
     with open(path_final, 'r') as f:
         data = [json.loads(line) for line in f]
     with open(path_dest, 'w') as f:
