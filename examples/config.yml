@@ -1,0 +1,47 @@
+output:
+
+
+hf_repo: "pharaouk/aaa"
+hf_upload: false
+
+
+
+prompt_format: "Question: {questions}. {options} Answer:"
+
+dataset_size: 2000
+data_seed: 42
+force_dist: true
+
+benchmarks:
+  mmlu: 
+    count: 100
+  arc_c:
+    count: 100
+  arc_e:
+    count: 100
+  agieval:
+    count: 100
+  boolq:
+    count: 100
+  obqa:
+    count: 100
+  bigbench:
+    count: 100
+  truthfulqa:
+    count: 100
+  winogrande:
+    count: 100
+
+
+
+
+# device: "cuda"
+# dtype: "bfloat16"
+# noise_levels: [0.00001]
+# sparsities: [0.42]
+# layer_names: ["mlp", "self_attn", "lm_head"]
+# layer_ranges: [[0, 31]]
+# noise_types: 
+#   mlp: "normal"
+#   self_attn: "normal"
+# param_types: ["weight", "bias"]

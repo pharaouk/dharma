@@ -34,7 +34,7 @@ def runner(output, config):
     make_dir(path_final)
     data_seed = config.data_seed
     force_dist = config.force_dist
-
+    
     dataset_samples = compute_dataset_distribution(config)
     print(f"DISTRIBUTIONS - {dataset_samples}")
 
