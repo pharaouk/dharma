@@ -5,8 +5,7 @@ from datasets import load_dataset, concatenate_datasets, get_dataset_config_name
 from utils import *
 
 
-def craft_agieval(chunk_size, processor, agieval_path, path_final, count=None, seed=None, force=False):
-
+def craft_agieval(processor, agieval_path, path_final, count=None, seed=None, force=False):
     datasets = [
         'agieval-sat-math',
         'agieval-sat-en-without-passage',
@@ -18,14 +17,12 @@ def craft_agieval(chunk_size, processor, agieval_path, path_final, count=None, s
         'agieval-aqua-rat'
     ]
 
-    samples_per_dataset = 50
+    lines = []
 
     for dataset in datasets:
         ds = load_dataset('dmayhem93/' + dataset)
-
         ds = concatenate_datasets([ ds['test']])
-        
-        lines = []
+
         for doc in ds:
             num_to_letter = {idx: letter for idx, letter in enumerate(string.ascii_uppercase[:len(doc['choices'])])}
             doc["answerKey"] = num_to_letter.get(doc["gold"][0], doc["gold"][0])
@@ -36,10 +33,21 @@ def craft_agieval(chunk_size, processor, agieval_path, path_final, count=None, s
             }
             lines.append(out_doc)
 
-        lines = lines[:samples_per_dataset]
+    if force:
+        answers = set(row['output'] for row in lines)
+        data_by_answer = {answer: [row for row in lines if row['output'] == answer] for answer in answers}
+        samples_per_answer = count // len(answers)
+        sampled_data = [random.sample(rows, min(samples_per_answer, len(rows))) for rows in data_by_answer.values()]
+        sampled_data = [row for rows in sampled_data for row in rows]
+        remaining_samples = count - len(sampled_data)
+        if remaining_samples > 0:
+            remaining_data = [row for row in lines if row not in sampled_data]
+            sampled_data.extend(random.sample(remaining_data, remaining_samples))
 
-        processor.write_json_data(agieval_path, lines)
-        processor.append_json_data(path_final, lines)
+        lines = sampled_data
 
+    else:
+        lines = lines[:count]
 
-
+    processor.write_json_data(agieval_path, lines)
+    processor.append_json_data(path_final, lines)

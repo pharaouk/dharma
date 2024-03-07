@@ -45,7 +45,7 @@ def runner(output, config):
         craft_mmlu(processor, output, mmlu_path, path_final, mmlu_count, data_seed, force_dist)
         check(output)
         mmlu_data = processor.load_json_data(mmlu_path)
-        chunk_size = len(mmlu_data)
+        chunk_size = 1
         count_answer_options(mmlu_path)
 
     #ARC-C and ARC-E
@@ -64,13 +64,11 @@ def runner(output, config):
         check(output)
         count_answer_options(arc_e_path)
 
-
-
     # #BIGBENCH
     if is_dataset_active(dataset_samples, 'bigbench'):
         bigbench_count = get_dataset_count(dataset_samples, 'bigbench')
         bigbench_path = f'{output}/benchmarks/bigbench.json'
-        craft_bigbench(chunk_size, processor, bigbench_path, path_final)
+        craft_bigbench( processor, bigbench_path, path_final, bigbench_count, data_seed, force_dist)
         check(output)
 
     #BOOLQ
@@ -78,7 +76,7 @@ def runner(output, config):
         boolq_count = get_dataset_count(dataset_samples, 'boolq')
 
         boolq_path = f'{output}/benchmarks/boolq.json'
-        craft_boolq(chunk_size, processor, boolq_path, path_final)
+        craft_boolq(processor, boolq_path, path_final, boolq_count, data_seed, force_dist)
         check(output)
         count_answer_options(boolq_path)
 
@@ -86,7 +84,7 @@ def runner(output, config):
     if is_dataset_active(dataset_samples, 'winogrande'):
         winogrande_count = get_dataset_count(dataset_samples, 'winogrande')
         wino_path = f'{output}/benchmarks/winogrande.json'
-        craft_winogrande(chunk_size, processor, wino_path, path_final)
+        craft_winogrande(processor, wino_path, path_final, winogrande_count, data_seed, force_dist)
         check(output)
         count_answer_options(wino_path)
 
@@ -94,7 +92,7 @@ def runner(output, config):
     if is_dataset_active(dataset_samples, 'obqa'):
         obqa_count = get_dataset_count(dataset_samples, 'obqa')
         openbookqa_path = f'{output}/benchmarks/openbookqa.json'
-        craft_obqa(chunk_size, processor, openbookqa_path, path_final)
+        craft_obqa(processor, openbookqa_path, path_final, obqa_count, data_seed, force_dist)
         check(output)
         count_answer_options(openbookqa_path)
 
@@ -102,7 +100,7 @@ def runner(output, config):
     if is_dataset_active(dataset_samples, 'truthfulqa'):
         truthfulqa_count = get_dataset_count(dataset_samples, 'truthfulqa')
         truthful_qa_path = f'{output}/benchmarks/truthful_qa.json'
-        craft_truthfulqa(chunk_size, processor, truthful_qa_path, path_final)
+        craft_truthfulqa(processor, truthful_qa_path, path_final, obqa_count, data_seed, force_dist)
         check(output)
         count_answer_options(truthful_qa_path)
 
@@ -110,7 +108,7 @@ def runner(output, config):
     if is_dataset_active(dataset_samples, 'agieval'):
         agieval_count = get_dataset_count(dataset_samples, 'agieval')
         agieval_path = f'{output}/benchmarks/agieval.json'
-        craft_agieval(chunk_size, processor, agieval_path, path_final)
+        craft_agieval(processor, agieval_path, path_final, agieval_count, data_seed, force_dist)
         check(output)
         count_answer_options(agieval_path)
 

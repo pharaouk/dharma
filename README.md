@@ -34,23 +34,21 @@ force_dist: true  #(bool) force even distribution for answers (i.e. A-25 B-25 C-
 benchmarks: #this determines which benchmarks and counts/distirbutions for the target dataset. enter 0 if you don't want that dataset included.
 
   mmlu: 
-    count: 100
+    count: 1
   arc_c:
-    count: 100
+    count: 1
   arc_e:
-    count: 100
+    count: 1
   agieval:
-    count: 100
+    count: 1
   boolq:
-    count: 100
+    count: 1
   obqa:
-    count: 100
-  bigbench:
-    count: 100
+    count: 1
   truthfulqa:
-    count: 100
+    count: 1
   winogrande:
-    count: 100
+    count: 1
 
 ```
 
@@ -67,9 +65,18 @@ python dharma.py --config <CONFIG_PATH>
 
 
 TODOS
-1. Connect count, seed and force_dist to all benchmarks **[in progress]**
-2. Custom prompt formats 
-3. Add upload to HF with template MD
-4. Add a testing/eval script 
+0. bigbench compatibility. **[in progress]**
+1. Custom prompt formats (to replace standard one we've set)
+2. Add upload to HF option with template MD as readme, and to custom namespace (check for HF token) 
+3. standardize dataset cleaning funcs (add sim search and subject based segmentation)
+4. Add a testing/eval script with local llm w local lb
 5. Add a Callback example for training
 6. Add axolotl example
+7. Upload cleaned and corrected copies of all benchmrk datasets to HF
+8. Fix uneven distributions
+9. CLIx updates (tqdm + cleanup)
+10. pip package
+11. New benchmarks, non MCQ
+12. HF Compatible Custom Callback library with customization options
+13. better selection algo for the benchmarks
+14. Randomize answers options  (could be useful to evaluate/minimize bias in model)

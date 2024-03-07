@@ -22,6 +22,9 @@ def craft_mmlu(processor, output_path, mmlu_path, path_final, count, seed=None, 
             sampled_data.extend(random.sample(remaining_data, remaining_samples))
     else:
         sampled_data = random.sample(data, count)
+    
+    for row in sampled_data:
+        row['subject'] = 'MMLU'
     make_dir(path_final)
     make_dir(mmlu_path)
     processor.write_json_data(path_final, sampled_data)

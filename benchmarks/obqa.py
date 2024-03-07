@@ -1,15 +1,14 @@
 import json
-import random
 import string
 from datasets import load_dataset, concatenate_datasets, get_dataset_config_names
 from utils import *
+import random
+from collections import defaultdict
 
 
-         
-
-def craft_obqa(chunk_size, processor, obqa_path, path_final, count=None, seed=None, force=False):
+def craft_obqa(processor, obqa_path, path_final, count=None, seed=None, force=False):
     ds = load_dataset('openbookqa')
-    ds = concatenate_datasets([ds['train'], ds['test'], ds['validation']])
+    ds = concatenate_datasets([ds['test'], ds['validation']])
     ds = ds.shuffle()
     lines = []
     for doc in ds:
@@ -21,7 +20,18 @@ def craft_obqa(chunk_size, processor, obqa_path, path_final, count=None, seed=No
         }
         lines.append(out_doc)
 
-    lines = lines[:chunk_size]
+    if force:
+        answers = set(line['output'] for line in lines)
+        lines_by_answer = {answer: [line for line in lines if line['output'] == answer] for answer in answers}
+        samples_per_answer = count // len(answers)
+        sampled_lines = [random.sample(lines, min(samples_per_answer, len(lines))) for lines in lines_by_answer.values()]
+        sampled_lines = [line for lines in sampled_lines for line in lines]
+        remaining_samples = count - len(sampled_lines)
+        if remaining_samples > 0:
+            remaining_lines = [line for line in lines if line not in sampled_lines]
+            sampled_lines.extend(random.sample(remaining_lines, remaining_samples))
+    else:
+        sampled_lines = lines[:count]
 
-    processor.write_json_data(obqa_path, lines)
-    processor.append_json_data(path_final, lines)
+    processor.write_json_data(obqa_path, sampled_lines)
+    processor.append_json_data(path_final, sampled_lines)

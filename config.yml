@@ -14,22 +14,22 @@ force_dist: true
 
 benchmarks:
   mmlu: 
-    count: 100
+    count: 1
   arc_c:
-    count: 100
+    count: 1
   arc_e:
-    count: 100
+    count: 1
   agieval:
-    count: 100
+    count: 1
   boolq:
-    count: 100
+    count: 1
   obqa:
-    count: 100
+    count: 1
   bigbench:
-    count: 100
+    count: 0
   truthfulqa:
-    count: 100
+    count: 1
   winogrande:
-    count: 100
+    count: 1
 
 
