@@ -34,14 +34,3 @@ benchmarks:
 
 
 
-
-# device: "cuda"
-# dtype: "bfloat16"
-# noise_levels: [0.00001]
-# sparsities: [0.42]
-# layer_names: ["mlp", "self_attn", "lm_head"]
-# layer_ranges: [[0, 31]]
-# noise_types: 
-#   mlp: "normal"
-#   self_attn: "normal"
-# param_types: ["weight", "bias"]
