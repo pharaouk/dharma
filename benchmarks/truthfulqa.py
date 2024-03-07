@@ -5,7 +5,7 @@ from datasets import load_dataset, concatenate_datasets, get_dataset_config_name
 from utils import *
 
 
-def craft_truthfulqa(chunk_size, processor, tqa_path, path_final):
+def craft_truthfulqa(chunk_size, processor, tqa_path, path_final, count=None, seed=None, force=False):
     ds = load_dataset('truthful_qa', 'multiple_choice')
     ds = concatenate_datasets([ds['validation']])
     lines = []

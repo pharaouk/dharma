@@ -5,7 +5,7 @@ from datasets import load_dataset, concatenate_datasets, get_dataset_config_name
 from utils import *
 
 
-def craft_agieval(chunk_size, processor, agieval_path, path_final):
+def craft_agieval(chunk_size, processor, agieval_path, path_final, count=None, seed=None, force=False):
 
     datasets = [
         'agieval-sat-math',

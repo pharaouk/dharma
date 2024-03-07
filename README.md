@@ -67,7 +67,9 @@ python dharma.py --config <CONFIG_PATH>
 
 
 TODOS
-1. Connect count, seed and force_dist to all benchmarks
+1. Connect count, seed and force_dist to all benchmarks **[in progress]**
 2. Custom prompt formats 
 3. Add upload to HF with template MD
-4. 
+4. Add a testing/eval script 
+5. Add a Callback example for training
+6. Add axolotl example

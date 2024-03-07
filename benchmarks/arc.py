@@ -6,7 +6,7 @@ from utils import *
 
 
 
-def craft_arc(chunk_size, processor, arc_c_path, arc_e_path, path_final):
+def craft_arc(chunk_size, processor, arc_c_path, arc_e_path, path_final, count=None, seed=None, force=False):
     datasets = ['ARC-Challenge', 'ARC-Easy']
     file_names = [arc_c_path, arc_e_path]
 

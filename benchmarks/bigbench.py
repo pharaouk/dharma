@@ -6,7 +6,7 @@ from utils import *
 
 
 
-def craft_bigbench(chunk_size, processor, bigbench_path, path_final):
+def craft_bigbench(chunk_size, processor, bigbench_path, path_final, count=None, seed=None, force=False):
     config_names = get_dataset_config_names("tasksource/bigbench")
     # print(config_names)
     # print(type(config_names))

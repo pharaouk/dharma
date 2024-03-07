@@ -4,7 +4,7 @@ import string
 from datasets import load_dataset, concatenate_datasets, get_dataset_config_names
 from utils import *
 
-def craft_boolq(chunk_size, processor, boolq_path, path_final):
+def craft_boolq(chunk_size, processor, boolq_path, path_final, count=None, seed=None, force=False):
 
     ds = load_dataset('boolq')
     # ds = concatenate_datasets([ds['train'], ds['validation']])
