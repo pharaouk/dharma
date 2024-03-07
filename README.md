@@ -5,7 +5,7 @@
 🤗 <a href="https://huggingface.co/pharaouk" target="_blank">HF Repo</a> • 🐦 <a href="https://twitter.com/far__el" target="_blank">Twitter</a> <br>
 </p>
 
-<img src='img/image.png' width=300 height=300 >
+<img src='img/image.png' width=600 height=200 >
 
 
 
