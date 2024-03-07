@@ -7,6 +7,9 @@
 
 <img src='img/image.png' width=1000 >
 
+use dharma to craft small or large benchmarking datasets that can be used during training or for fast evals. 
+these serve as good indicators on the benchmarks you care about. make sure to craft a benchmark dataset appropriate for your use cases. 
+more benchmarks and features are in the works to give you even more control over your bench datasets.
 
 
 ## Quickstart
@@ -61,6 +64,14 @@ or
 python dharma.py --config <CONFIG_PATH>
 ```
 
+
+
+**How is Dharma used?**
+Example dharma-1 dataset: https://huggingface.co/datasets/pharaouk/dharma-1
+Example axolotl implementation: [https://github.com/OpenAccess-AI-Collective/axolotl/blob/638c2dafb54f1c7c61a5f7ad40f8cf6965bec896/src/axolotl/core/trainer_builder.py#L152](https://github.com/OpenAccess-AI-Collective/axolotl/blob/638c2dafb54f1c7c61a5f7ad40f8cf6965bec896/src/axolotl/utils/callbacks/__init__.py#L253)
+
+Example wandb:
+<img width="1290" alt="Wandb" src="https://github.com/pharaouk/dharma/assets/36641995/cd9cb5d4-c3d7-444b-b83a-1c70c3c83183">
 
 
 
