@@ -116,8 +116,6 @@ def make_unshuffled(output_path):
         for item in data:
             f.write(json.dumps(item) + '\n')
 
-
-
    
 def make_datasets(output_path):
     path_source = f'{output_path}/final/dharma_eval_unshuffled.json'

@@ -34,7 +34,7 @@ def runner(output, config):
     make_dir(path_final)
     data_seed = config.data_seed
     force_dist = config.force_dist
-    
+
     dataset_samples = compute_dataset_distribution(config)
     print(f"DISTRIBUTIONS - {dataset_samples}")
 
@@ -49,14 +49,22 @@ def runner(output, config):
         count_answer_options(mmlu_path)
 
     #ARC-C and ARC-E
-    if is_dataset_active(dataset_samples, 'arc'):
-        arc_count = get_dataset_count(dataset_samples, 'arc')
+    if is_dataset_active(dataset_samples, 'arc_c'):
+        arc_c_count = get_dataset_count(dataset_samples, 'arc_c')
         arc_c_path = f'{output}/benchmarks/arc_c.json'
-        arc_e_path = f'{output}/benchmarks/arc_e.json'
-        craft_arc(chunk_size, processor, arc_c_path, arc_e_path, path_final)
+        craft_arc_c(processor, arc_c_path, path_final, arc_c_count, data_seed, force_dist)
         check(output)
         count_answer_options(arc_c_path)
+
+    #ARC-C and ARC-E
+    if is_dataset_active(dataset_samples, 'arc_e'):
+        arc_e_count = get_dataset_count(dataset_samples, 'arc_e')
+        arc_e_path = f'{output}/benchmarks/arc_e.json'
+        craft_arc_e(processor, arc_e_path, path_final, arc_e_count, data_seed, force_dist)
+        check(output)
         count_answer_options(arc_e_path)
+
+
 
     # #BIGBENCH
     if is_dataset_active(dataset_samples, 'bigbench'):
