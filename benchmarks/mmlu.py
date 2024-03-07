@@ -8,7 +8,7 @@ from utils import *
 
 def craft_mmlu(processor, output_path, mmlu_path, path_final):
 
-    data = processor.load_json_data('seed_mmlu.json')
+    data = processor.load_json_data('benchmarks/seed_mmlu.jsonl')
 
     total_samples = len(data)
     percentage = 0.8
