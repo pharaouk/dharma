@@ -1,18 +1,13 @@
-output: "dharma_test2"
+output: <DATASET_NAME>
 
-
-hf_repo: pharaouk/dharma_test3
-hf_upload: true
+hf_repo: <YOUR_HF_NAMESPACE_AND_REPOID>
+hf_upload: false
 hf_private: false
 
-
-
 prompt_format: "Question: {questions}. {options} Answer:"
-
 dataset_size: 100
 data_seed: 42
 force_dist: true
-
 benchmarks:
   mmlu: 
     count: 1
