@@ -95,3 +95,4 @@ TODOS
 12. HF Compatible Custom Callback library with customization options
 13. better selection algo for the benchmarks
 14. Randomize answers options  (could be useful to evaluate/minimize bias in model)
+15. More languages
