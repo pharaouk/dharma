@@ -22,14 +22,13 @@ pip install -r requirements.txt
 
 Configs:
 ```
-output: #(string) destination output path + dataset name, leave blank to use default
+output: #(string) dataset name, leave blank to use default
 
 hf_namespace: #(string)  hf username/namespace
-
 hf_upload: false  #(bool) hf username/namespace
 hf_private: false #(bool) hf private? T/F
 
-prompt_format: "Question: {questions}. {options} Answer:"  #(string) prompt format to use for the eval datasets
+prompt_format: "Question: {questions}. {options} Answer:"  #(string) prompt format to use for the eval datasets, not yet customizable
 
 dataset_size: 2000  #(int) total target dataset size
 
@@ -87,15 +86,12 @@ TODOS
 
 
 0. bigbench compatibility. **[in progress]** (currently not optimal)
-1. Custom prompt formats (to replace standard one we've set)
-2. Add upload to HF option with template MD as readme, and to custom namespace (check for HF token) 
-3. standardize dataset cleaning funcs (add sim search and subject based segmentation)
-4. Add a testing/eval script with local llm w local lb
-5. Add a Callback example for training
-6. Add axolotl example
-7. Upload cleaned and corrected copies of all benchmrk datasets to HF
-8. Fix uneven distributions
-9. CLIx updates (tqdm + cleanup)
+1. Custom prompt formats (to replace standard one we've set) 
+2. standardize dataset cleaning funcs (add sim search and subject based segmentation)
+3. Add a testing/eval script with local llm w local lb
+4. Upload cleaned and corrected copies of all benchmrk datasets to HF
+5. Fix uneven distributions
+6. CLIx updates (tqdm + cleanup)
 10. pip package
 11. New benchmarks, non MCQ
 12. HF Compatible Custom Callback library with customization options
