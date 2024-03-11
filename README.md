@@ -72,6 +72,11 @@ python dharma.py --config <CONFIG_PATH>
 Example dharma-1 dataset: https://huggingface.co/datasets/pharaouk/dharma-1
 Example axolotl implementation: [https://github.com/OpenAccess-AI-Collective/axolotl/blob/638c2dafb54f1c7c61a5f7ad40f8cf6965bec896/src/axolotl/core/trainer_builder.py#L152](https://github.com/OpenAccess-AI-Collective/axolotl/blob/638c2dafb54f1c7c61a5f7ad40f8cf6965bec896/src/axolotl/utils/callbacks/__init__.py#L253)
 
+```
+#On Axolotl (in config.yml for your training run)
+do_bench_eval: true
+bench_dataset: <LINK_TO_JSON> (default="pharaouk/dharma-1/dharma_1_mini.json")
+```
 Example wandb:
 <img width="1290" alt="Wandb" src="https://github.com/pharaouk/dharma/assets/36641995/cd9cb5d4-c3d7-444b-b83a-1c70c3c83183">
 
