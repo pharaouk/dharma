@@ -27,6 +27,7 @@ output: #(string) destination output path + dataset name, leave blank to use def
 hf_namespace: #(string)  hf username/namespace
 
 hf_upload: false  #(bool) hf username/namespace
+hf_private: false #(bool) hf private? T/F
 
 prompt_format: "Question: {questions}. {options} Answer:"  #(string) prompt format to use for the eval datasets
 

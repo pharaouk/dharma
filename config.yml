@@ -1,14 +1,15 @@
-output:
+output: "dharma_test2"
 
 
-hf_repo: "pharaouk/aaa"
-hf_upload: false
+hf_repo: pharaouk/dharma_test3
+hf_upload: true
+hf_private: false
 
 
 
 prompt_format: "Question: {questions}. {options} Answer:"
 
-dataset_size: 2000
+dataset_size: 100
 data_seed: 42
 force_dist: true
 

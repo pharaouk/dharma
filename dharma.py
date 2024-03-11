@@ -34,6 +34,9 @@ def runner(output, config):
     make_dir(path_final)
     data_seed = config.data_seed
     force_dist = config.force_dist
+    hf_upload = getattr(config, 'hf_upload', False)
+    hf_repo = config.hf_repo
+    hf_private = getattr(config, 'hf_private', False)
 
     dataset_samples = compute_dataset_distribution(config)
     print(f"DISTRIBUTIONS - {dataset_samples}")
@@ -117,10 +120,12 @@ def runner(output, config):
     #Make datasets
     make_unshuffled(output)
     make_shuffled(output)
-    make_datasets(output)
 
     #upload to huggingface Hub with each dataset as a config
-    
+    if hf_upload:
+        d_size, d_config = check(output)
+        create_md(output, d_config)
+        upload_to_hf(output, hf_repo, hf_private)
 
 
 
