@@ -15,13 +15,25 @@ of course, MCQ based benches do not inform us much on performance beyond this fo
 
 
 ## Quickstart
+
+```
+!pip install git+https://github.com/pharaouk/dharma
+
+#SETUP config.yml file
+
+#IN YOUR SCRIPT
+
+import dharma
+dharma.run_dharma('config.yml')
+
+```
+
+or 
+
 Clone and Setup:
 ```
+git clone https://github.com/pharaouk/dharma.git
 pip install -r requirements.txt
-```
-or 
-```
-pip install git+https://github.com/pharaouk/dharma
 ```
 
 Configs:
@@ -63,11 +75,11 @@ benchmarks: #this determines which benchmarks and counts/distirbutions for the t
 
 Run:
 ```
-python dharma.py
+python dharma/dharma.py
 ```
 or
 ```
-python dharma.py --config <CONFIG_PATH>
+python dharma/dharma.py --config <CONFIG_PATH>
 ```
 
 
