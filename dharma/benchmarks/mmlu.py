@@ -11,7 +11,7 @@ import os
 
 def craft_mmlu(processor, output_path, mmlu_path, path_final, count, seed=None, force=False):
     script_dir = os.path.dirname(os.path.realpath(__file__))
-    file_path = os.path.join(script_dir, 'benchmarks', 'seed_mmlu.jsonl')
+    file_path = os.path.join(script_dir, 'seed_mmlu.jsonl')
 
 
     data = processor.load_json_data(file_path)
