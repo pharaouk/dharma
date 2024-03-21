@@ -2,7 +2,7 @@ import json
 import random
 import string
 from datasets import load_dataset, concatenate_datasets, get_dataset_config_names
-from utils import *
+from dharma.utils import *
 import random
 import numpy as np
 

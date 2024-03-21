@@ -2,7 +2,7 @@ import json
 import random
 import string
 from datasets import load_dataset, concatenate_datasets, get_dataset_config_names
-from utils import *
+from dharma.utils import *
 import random
 
 def craft_arc_c(processor, arc_c_path, path_final, count=None, seed=None, force=False):

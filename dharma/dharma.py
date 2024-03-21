@@ -4,7 +4,7 @@ import argparse
 import yaml
 import string
 from datasets import load_dataset, concatenate_datasets, get_dataset_config_names
-from utils import *
+from dharma.utils import *
 from benchmarks.mmlu import *
 from benchmarks.agieval import *
 from benchmarks.boolq import *
