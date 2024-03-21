@@ -23,5 +23,8 @@ setuptools.setup(
             'dharma=dharma:run_dharma',
         ],
     },
+    package_data={
+        'dharma': ['benchmarks/*.jsonl'],
+    },
     install_requires=['numpy','scipy','requests', 'datasets', 'pyyaml'],
 ) 
