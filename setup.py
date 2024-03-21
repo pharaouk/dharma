@@ -18,5 +18,10 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
+    entry_points={
+        'console_scripts': [
+            'dharma=dharma:run_dharma',
+        ],
+    },
     install_requires=['numpy','scipy','requests', 'datasets', 'pyyaml'],
 ) 
