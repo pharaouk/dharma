@@ -5,9 +5,16 @@ from datasets import load_dataset, concatenate_datasets, get_dataset_config_name
 from dharma.utils import *
 import random
 import numpy as np
+import os
+
+
 
 def craft_mmlu(processor, output_path, mmlu_path, path_final, count, seed=None, force=False):
-    data = processor.load_json_data('seed_mmlu.jsonl')
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    file_path = os.path.join(script_dir, 'benchmarks', 'seed_mmlu.jsonl')
+
+
+    data = processor.load_json_data(file_path)
     if seed is not None:
         random.seed(seed)
     if force:
