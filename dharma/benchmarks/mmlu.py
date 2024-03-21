@@ -7,7 +7,7 @@ import random
 import numpy as np
 
 def craft_mmlu(processor, output_path, mmlu_path, path_final, count, seed=None, force=False):
-    data = processor.load_json_data('dharma/benchmarks/seed_mmlu.jsonl')
+    data = processor.load_json_data('seed_mmlu.jsonl')
     if seed is not None:
         random.seed(seed)
     if force:
