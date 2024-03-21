@@ -15,9 +15,13 @@ of course, MCQ based benches do not inform us much on performance beyond this fo
 
 
 ## Quickstart
-Setup:
+Clone and Setup:
 ```
 pip install -r requirements.txt
+```
+or 
+```
+pip install git+https://github.com/pharaouk/dharma
 ```
 
 Configs:
