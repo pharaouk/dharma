@@ -20,7 +20,7 @@ setuptools.setup(
     ],
     entry_points={
         'console_scripts': [
-            'dharma=dharma:run_dharma',
+            'dharma=dharma:dharma:run_dharma',
         ],
     },
     install_requires=['numpy','scipy','requests', 'datasets', 'pyyaml'],
