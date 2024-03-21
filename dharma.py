@@ -150,7 +150,16 @@ def main():
     runner(output, config)
 
 
+def run_dharma(config_path='config.yml'):
+    config = load_config(config_path)
+    if config.output:
+        output = config.output
+    else:
+        random_suffix = ''.join(random.choices(string.ascii_letters + string.digits, k=4))
+        output = f"dharma_{random_suffix}"
 
+    runner(output, config)
+    
 
 if __name__ == "__main__":
     main()
