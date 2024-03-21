@@ -5,14 +5,14 @@ import yaml
 import string
 from datasets import load_dataset, concatenate_datasets, get_dataset_config_names
 from dharma.utils import *
-from dharma.benchmarks.mmlu import *
-from dharma.benchmarks.agieval import *
-from dharma.benchmarks.boolq import *
-from dharma.benchmarks.obqa import *
-from dharma.benchmarks.winogrande import *
-from dharma.benchmarks.truthfulqa import *
-from dharma.benchmarks.bigbench import *
-from dharma.benchmarks.arc import *
+from benchmarks.mmlu import *
+from benchmarks.agieval import *
+from benchmarks.boolq import *
+from benchmarks.obqa import *
+from benchmarks.winogrande import *
+from benchmarks.truthfulqa import *
+from benchmarks.bigbench import *
+from benchmarks.arc import *
 
 
 processor = DataProcessor()
