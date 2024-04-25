@@ -20,7 +20,7 @@ def craft_agieval(processor, agieval_path, path_final, count=None, seed=None, fo
     lines = []
 
     for dataset in datasets:
-        ds = load_dataset('dmayhem93/' + dataset)
+        ds = load_dataset('hails/' + dataset) # the hails/agieval-* datasetes are based on dmayhem93/agieval-*
         ds = concatenate_datasets([ ds['test']])
 
         for doc in ds:
